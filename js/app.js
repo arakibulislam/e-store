@@ -1,3 +1,5 @@
+// fetch coustom json file
+
 const loadProducts = () => {
   const url = '../js/db.json';
   fetch(url)
@@ -18,18 +20,12 @@ const showProducts = (products) => {
     const div = document.createElement("div");
     div.classList.add("col");
     div.innerHTML = `
-    
-
-
-
-
       <div class="text-center h-100 single-product ">
       <img class=" product-image mx-auto" src=${image}></img>
       <div class="card-body">
       <h3>${product.title.slice(0, 30)}</h3>
       <p><span class="fw-bold">Category: </span> ${product.category}</p>
-      <p><span class="fw-bold">Rating: </span>${product.rating.rate} 
-      </p>
+      <p><span class="fw-bold">Rating: </span>${product.rating.rate} </p>
       <p>
       <i class=" fas fa-star text-warning"></i>
       <i class=" fas fa-star text-warning"></i>
@@ -38,7 +34,6 @@ const showProducts = (products) => {
       <i class="far fa-star text-warning"></i>
       </p>
       <p><i class="fas fa-user-check mx-2 text-primary"></i><span class="fw-bold">${product.rating.count}</span> Person rated this product</p>
-      
       </div>
       <div class="text-center">
       <h2>Price: $ ${product.price}</h2>
@@ -46,20 +41,13 @@ const showProducts = (products) => {
       <button id="details-btn" class="btn btn-danger">Details</button></div>
       </div>
     </div>
-
-
-
-
-
-
-
-
-
-
       `;
     document.getElementById("all-products").appendChild(div);
   }
+  
 };
+
+// add to cart function 
 let count = 0;
 const addToCart = (id, price) => {
   count = count + 1;
@@ -70,6 +58,7 @@ const addToCart = (id, price) => {
   document.getElementById("add-cart").innerText = count;
 };
 
+// get all input value
 const getInputValue = (id) => {
   const element = document.getElementById(id).innerText;
   const converted = parseFloat(element);
@@ -117,3 +106,21 @@ const updateTotal = () => {
     getInputValue("total-tax");
   document.getElementById("total").innerText = grandTotal.toFixed(2);
 };
+
+// Optional Buy Now onclick Function 
+
+const getId = (id) =>{
+  const myId = document.getElementById(id);
+  return myId;
+}
+
+const buyNow = () => {
+  const checkout = document.getElementById('checkout-price');
+  const total = parseFloat( document.getElementById("total").innerText) + parseFloat(checkout.innerText);
+  checkout.innerText = total.toFixed(2);
+  getId('total-Products').innerText = "0";
+  getId('price').innerText = "0";
+  getId('delivery-charge').innerText = "0";
+  getId('total-tax').innerText = "0";
+  getId('total').innerText = "0";
+}
