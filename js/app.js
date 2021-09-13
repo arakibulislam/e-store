@@ -25,14 +25,7 @@ const showProducts = (products) => {
       <div class="card-body">
       <h3>${product.title.slice(0, 30)}</h3>
       <p><span class="fw-bold">Category: </span> ${product.category}</p>
-      <p><span class="fw-bold">Rating: </span>${product.rating.rate} </p>
-      <p>
-      <i class=" fas fa-star text-warning"></i>
-      <i class=" fas fa-star text-warning"></i>
-      <i class=" fas fa-star text-warning"></i>
-      <i class=" fas fa-star text-warning"></i>
-      <i class="far fa-star text-warning"></i>
-      </p>
+      <p><span class="fw-bold me-1">Rating: </span><span id="${product.id}" class="me-1" ></span>(${product.rating.rate}) </p>
       <p><i class="fas fa-user-check mx-2 text-primary"></i><span class="fw-bold">${product.rating.count}</span> Person rated this product</p>
       </div>
       <div class="text-center">
@@ -43,9 +36,55 @@ const showProducts = (products) => {
     </div>
       `;
     document.getElementById("all-products").appendChild(div);
+    rating(product.id, product.rating.rate);
   }
-  
+
 };
+
+// product rating function
+
+const rating = (id, stars) => {
+  if (stars >= 4) {
+    document.getElementById(id).innerHTML = `
+      <i class=" fas fa-star text-warning"></i>
+      <i class=" fas fa-star text-warning"></i>
+      <i class=" fas fa-star text-warning"></i>
+      <i class=" fas fa-star text-warning"></i>
+      <i class="far fa-star text-warning"></i>
+      `
+    return;
+  }
+  if (stars >= 3) {
+    document.getElementById(id).innerHTML = `
+      <i class=" fas fa-star text-warning"></i>
+      <i class=" fas fa-star text-warning"></i>
+      <i class=" fas fa-star text-warning"></i>
+      <i class="far fa-star text-warning"></i>
+      <i class="far fa-star text-warning"></i> 
+      `
+    return;
+  }
+  if (stars >= 2) {
+    document.getElementById(id).innerHTML = `
+      <i class=" fas fa-star text-warning"></i>
+      <i class=" fas fa-star text-warning"></i>
+      <i class="far fa-star text-warning"></i>
+      <i class="far fa-star text-warning"></i>
+      <i class="far fa-star text-warning"></i>
+      `
+    return;
+  }
+  if (stars >= 1) {
+    document.getElementById(id).innerHTML = `
+      <i class=" fas fa-star text-warning"></i>
+      <i class="far fa-star text-warning"></i>
+      <i class="far fa-star text-warning"></i>
+      <i class="far fa-star text-warning"></i>
+      <i class="far fa-star text-warning"></i>
+      `
+    return;
+  }
+}
 
 // add to cart function 
 let count = 0;
@@ -109,14 +148,14 @@ const updateTotal = () => {
 
 // Optional Buy Now onclick Function 
 
-const getId = (id) =>{
+const getId = (id) => {
   const myId = document.getElementById(id);
   return myId;
 }
 
 const buyNow = () => {
   const checkout = document.getElementById('checkout-price');
-  const total = parseFloat( document.getElementById("total").innerText) + parseFloat(checkout.innerText);
+  const total = parseFloat(document.getElementById("total").innerText) + parseFloat(checkout.innerText);
   checkout.innerText = total.toFixed(2);
   getId('total-Products').innerText = "0";
   getId('price').innerText = "0";
