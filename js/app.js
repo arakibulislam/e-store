@@ -1,4 +1,4 @@
-console.clear();
+
 // fetch coustom json file
 const loadProducts = () => {
   const url = '../js/db.json';
