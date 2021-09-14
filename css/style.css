@@ -1,7 +1,9 @@
 body {
+  background-color: red;
   overflow-x: hidden;
   font-family: "Montserrat", sans-serif;
 }
+
 .image{
   position: fixed;
   left: 0;
