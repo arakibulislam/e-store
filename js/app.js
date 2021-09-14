@@ -1,5 +1,5 @@
+console.clear();
 // fetch coustom json file
-
 const loadProducts = () => {
   const url = '../js/db.json';
   fetch(url)
@@ -30,7 +30,7 @@ const showProducts = (products) => {
       </div>
       <div class="text-center">
       <h2>Price: $ ${product.price}</h2>
-      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-secondary">add to cart</button>
+      <button onclick="addToCart(${product.price})" id="addToCart-btn" class="buy-now btn btn-secondary">add to cart</button>
       <button id="details-btn" class="btn btn-danger">Details</button></div>
       </div>
     </div>
@@ -88,7 +88,7 @@ const rating = (id, stars) => {
 
 // add to cart function 
 let count = 0;
-const addToCart = (id, price) => {
+const addToCart = (price) => {
   count = count + 1;
   updatePrice("price", price);
   updateTaxAndCharge();
@@ -154,9 +154,8 @@ const getId = (id) => {
 }
 
 const buyNow = () => {
-  const checkout = document.getElementById('checkout-price');
-  const total = parseFloat(document.getElementById("total").innerText) + parseFloat(checkout.innerText);
-  checkout.innerText = total.toFixed(2);
+  const total = parseFloat(getId('total').innerText) + parseFloat(getId('checkout-price').innerText);
+  getId('checkout-price').innerText = total.toFixed(2);
   getId('total-Products').innerText = "0";
   getId('price').innerText = "0";
   getId('delivery-charge').innerText = "0";
