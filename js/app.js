@@ -162,3 +162,11 @@ const buyNow = () => {
   getId('total-tax').innerText = "0";
   getId('total').innerText = "0";
 }
+
+// checkout function
+const checkout = () => {
+  const buy = confirm('are you sure !')
+  if (buy === true) {
+    window.print();
+  }
+}
